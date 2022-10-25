@@ -11,7 +11,7 @@ import {
   MDBCollapse
 } from 'mdb-react-ui-kit';
 
-export default function App() {
+export default function Navbar() {
   const [showNavSecond, setShowNavSecond] = useState(false);
 
   return (
