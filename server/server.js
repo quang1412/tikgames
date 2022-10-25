@@ -232,11 +232,9 @@ class TiktokLive {
     }
     this.listening()
 
-    // activeTiktokRoom[id] = this
     tiktokRoomsStorage.rooms.push(this)
 
     console.log("CREATE NEW TIKTOK ROOM", this.id)
-    // console.log("active Tiktok Room", Object.keys(activeTiktokRoom))
   }
   updateChannelIds() {
     this.channelIds = socketsCustomInfo.getChannelByTiktokId(this.id)
@@ -434,39 +432,39 @@ io.of("/").adapter.on("delete-room", (room) => {
 //   io.of("/").emit("tiktok-roomList", data)
 // }, 10000)
 
-app.get("/api/tts/word/:word", async (req, res) => {
-  const word = req.params.word
-  const subscriptionKey = "5046803c86b0454c9b854a51d6234c43"
-  const serviceRegion = "southeastasia"
+// app.get("/api/tts/word/:word", async (req, res) => {
+//   const word = req.params.word
+//   const subscriptionKey = "5046803c86b0454c9b854a51d6234c43"
+//   const serviceRegion = "southeastasia"
 
-  const speechConfig = SpeechConfig.fromSubscription(
-    subscriptionKey,
-    serviceRegion
-  )
+//   const speechConfig = SpeechConfig.fromSubscription(
+//     subscriptionKey,
+//     serviceRegion
+//   )
 
-  speechConfig.speechSynthesisOutputFormat =
-    SpeechSynthesisOutputFormat.Ogg24Khz16BitMonoOpus
+//   speechConfig.speechSynthesisOutputFormat =
+//     SpeechSynthesisOutputFormat.Ogg24Khz16BitMonoOpus
 
-  const synthesizer = new SpeechSynthesizer(speechConfig)
+//   const synthesizer = new SpeechSynthesizer(speechConfig)
 
-  synthesizer.speakSsmlAsync(
-    `
-    <speak version="1.0" xmlns="http://www.w3.org/2001/10/synthesis"
-       xmlns:mstts="https://www.w3.org/2001/mstts" xml:lang="vi-VN">
-    <voice name="vi-VN-HoaiMyNeural">
-            ${word}
-    </voice>
-    </speak>
-    `,
-    (resp) => {
-      const audio = resp.audioData
-      synthesizer.close()
-      const buffer = Buffer.from(audio)
-      res.set("Content-Type", "audio/ogg; codecs=opus; rate=24000")
-      res.send(buffer)
-    }
-  )
-})
+//   synthesizer.speakSsmlAsync(
+//     `
+//     <speak version="1.0" xmlns="http://www.w3.org/2001/10/synthesis"
+//        xmlns:mstts="https://www.w3.org/2001/mstts" xml:lang="vi-VN">
+//     <voice name="vi-VN-HoaiMyNeural">
+//             ${word}
+//     </voice>
+//     </speak>
+//     `,
+//     (resp) => {
+//       const audio = resp.audioData
+//       synthesizer.close()
+//       const buffer = Buffer.from(audio)
+//       res.set("Content-Type", "audio/ogg; codecs=opus; rate=24000")
+//       res.send(buffer)
+//     }
+//   )
+// })
 
 // PWAs want HTTPS!
 // function checkHttps(request, response, next) {
