@@ -18,7 +18,8 @@
     "react-toastify": "^9.0.6",
     "mdb-react-ui-kit": "^4.2.0",
     "tiktok-live-connector": "^1.0.1",
-    "winwheel": "^1.0.1"
+    "winwheel": "^1.0.1",
+    "@fortawesome/fontawesome-free": "^6.2.0"
   },
   "scripts": {
     "start": "npm run development",
