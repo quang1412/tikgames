@@ -11,7 +11,7 @@ a:not(.nav-link):hover {
   text-decoration: underline;
 }
 
-.card.bg-trans {
+.bg-trans {
   background-color: rgba(255, 255, 255, 0.375);
 }
 

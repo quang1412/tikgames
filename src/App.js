@@ -274,7 +274,7 @@ function App() {
         <LoadingPage />
       ) : (
         <>
-          <MDBRow>
+          <MDBRow className="animate__animated animate__fadeIn">
             <h5 className="text-light">Wheel of Fortune</h5>
             <MDBCol size="md" md="12" lg="5">
               <MDBCard className="mb-3 rounded-7 bg-trans">
@@ -295,16 +295,22 @@ function App() {
               </MDBCard>
               <MDBCard className="mb-3 rounded-7 bg-trans">
                 <MDBCardHeader className="border-0 pb-0 ">
-                  <h6 className="mb-0">Hiển thị lên OBS</h6>
+                  <h6 className="mb-0">Hiển thị lên Livestream</h6>
                 </MDBCardHeader>
                 <MDBCardBody>
                   <p className="mb-0">
-                    Tạo cửa sô nguồn trình duyệt bằng Url bên dưới{" "}
-                    <Link to="/support">
-                      <small>
-                        <MDBIcon far icon="question-circle" /> hướng dẫn
-                      </small>
-                    </Link>
+                    Tạo cửa sô{" "}
+                    <a href="https://obsproject.com/" target="_blank">
+                      OBS studio
+                    </a>{" "}
+                    /{" "}
+                    <a
+                      href="https://www.tiktok.com/studio/download"
+                      target="_blank"
+                    >
+                      Livestudio
+                    </a>{" "}
+                    nguồn trình duyệt bằng Url bên dưới
                   </p>
                   <p
                     style={{
@@ -338,7 +344,7 @@ function App() {
               size="md"
               md="12"
               lg="7"
-              className="mx-auto overflow-hidden mb-3"
+              className="overflow-hidden d-flex flex-column align-items-center justify-content-center"
             >
               <div className="mb-3">
                 <div style={{ paddingBottom: "100px" }}>

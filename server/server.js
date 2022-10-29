@@ -302,7 +302,7 @@ io.of("/").on("connection", async (socket) => {
       .catch((e) => {
         socket.emit(
           "tiktok-connectFailed",
-          "Tài khoản Tiktok chưa đăng ký game hoặc đã hết hạn"
+          "Tài khoản Tiktok chưa đăng ký hoặc đã hết hạn"
         )
       })
   })

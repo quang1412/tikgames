@@ -16,7 +16,7 @@ import "@fortawesome/fontawesome-free/css/all.min.css"
 import "./index.css"
 import "./libs/css/gradientBg.css"
 import "./libs/css/Animate.min.css"
-import HomePage from "./components/homePage"
+import HomePage from "./pages/homePage"
 import Footer from "./components/footer"
 
 window.toast = toast
@@ -59,13 +59,6 @@ const WidgetPage = () => (
   </Suspense>
 )
 
-const LazySupportPage = React.lazy(() => import("./pages/supportPage"))
-const SupportPage = () => (
-  <Suspense fallback={<Loading />}>
-    <LazySupportPage />
-  </Suspense>
-)
-
 const GeneralLayout = () => {
   return (
     <>
@@ -100,19 +93,18 @@ const Main = () => {
         <Route path="/" element={<GeneralLayout />}>
           <Route index element={<HomePage />} />
           <Route path="wheel-of-fortune" element={<MngWheelGame />} />
-          <Route path="support" element={<SupportPage />} />
+          <Route
+            path="*"
+            element={
+              <div className="text-center">
+                <h5>ERROR! Page not found</h5>
+              </div>
+            }
+          />
         </Route>
         <Route path="widget" element={<WidgetPage />}>
           <Route path="wheel-of-fortune" element={<WidgetWheelOfFortune />} />
         </Route>
-        <Route
-          path="*"
-          element={
-            <div className="text-center">
-              <h5>ERROR! Page not found</h5>
-            </div>
-          }
-        />
       </Routes>
     </Router>
   )
