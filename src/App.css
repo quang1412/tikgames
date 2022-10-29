@@ -1,0 +1,24 @@
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+a:not(.nav-link):hover {
+  text-decoration: underline;
+}
+
+.bg-trans {
+  background-color: rgba(255, 255, 255, 0.375);
+}
+
+/* input.form-control:focus {
+  background: rgba(255, 255, 255, 0.575) !important;
+} */
+.modal-content {
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(10px);
+}

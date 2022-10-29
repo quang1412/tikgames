@@ -1,0 +1,20 @@
+.ribbon-outer {
+  width: 100px;
+  height: 108px;
+  overflow: hidden;
+  position: absolute;
+  top: 0px;
+  right: 0px;
+}
+.ribbon-inner {
+  font: bold 14px Sans-Serif;
+  background: var(--mdb-danger);
+  text-align: center;
+  color: #fff;
+  padding: 5px;
+  top: 20px;
+  right: 8px;
+  width: 150px;
+  position: relative;
+  -webkit-transform: rotate(45deg);
+}
