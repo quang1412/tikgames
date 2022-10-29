@@ -16,7 +16,8 @@
     "socket.io": "^4.5.2",
     "socket.io-client": "^4.5.2",
     "tiktok-live-connector": "^1.0.2",
-    "winwheel": "^1.0.1"
+    "winwheel": "^1.0.1",
+    "@popperjs/core": "^2.11.6"
   },
   "scripts": {
     "start": "npm run development",
