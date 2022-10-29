@@ -2,6 +2,7 @@ const {
   WebcastPushConnection,
   signatureProvider,
 } = require("tiktok-live-connector")
+const request = require("request")
 const bodyParser = require("body-parser")
 const socket = require("socket.io")
 const express = require("express")
@@ -20,13 +21,13 @@ app.use(bodyParser.raw())
 let port
 console.log("❇️ NODE_ENV is", process.env.NODE_ENV)
 if (process.env.NODE_ENV === "production") {
-  port = process.env.PORT || 3000
+  port = process.env.PORT || 8080
   app.use(express.static(path.join(__dirname, "../build")))
   app.get(/^((?!\/api\/).)*$/, (request, response) => {
     response.sendFile(path.join(__dirname, "../build", "index.html"))
   })
 } else {
-  port = 3001
+  port = 8081
   console.log("⚠️ Not seeing your changes as you develop?")
   console.log(
     "⚠️ Do you need to set 'start': 'npm run development' in package.json?"
@@ -267,6 +268,26 @@ const widgetSettings = {
   },
 }
 
+const checkTiktokId = (id) => {
+  return new Promise((resolve, reject) => {
+    request(
+      "https://isetup.vn/tiktok/assets/js/tiktokgame.json",
+      (error, response, body) => {
+        try {
+          if (!error && response.statusCode == 200) {
+            var whileList = JSON.parse(body)
+            if (whileList.expirationDate[id] > currentTimeStamp()) {
+              return resolve()
+            } else throw new Error()
+          } else throw new Error()
+        } catch {
+          return reject()
+        }
+      }
+    )
+  })
+}
+
 /// WIDGET SOCKET CONNECT /////////////////
 io.of("/widget").on("connection", async (s) => {
   const cid = s.handshake.query.cid
@@ -286,17 +307,18 @@ io.of("/widget").on("connection", async (s) => {
 io.of("/").on("connection", async (socket) => {
   var tiktokRoom = {}
   socket.on("createRoom", (tiktokId) => {
-    const whileList = require("./whileList.json")
-    if (whileList.expirationDate[tiktokId] > currentTimeStamp()) {
-      console.log("create new room", tiktokId)
-      tiktokRoom.tiktok && tiktokRoom.tiktok.disconnect()
-      tiktokRoom = new TiktokLive(tiktokId, socket.id)
-    } else {
-      socket.emit(
-        "tiktok-connectFailed",
-        "Tài khoản Tiktok chưa đăng ký hoặc đã hết hạn"
-      )
-    }
+    checkTiktokId(tiktokId)
+      .then(() => {
+        console.log("create new room", tiktokId)
+        tiktokRoom.tiktok && tiktokRoom.tiktok.disconnect()
+        tiktokRoom = new TiktokLive(tiktokId, socket.id)
+      })
+      .catch(() => {
+        socket.emit(
+          "tiktok-connectFailed",
+          "Tài khoản Tiktok chưa đăng ký hoặc đã hết hạn"
+        )
+      })
   })
 
   socket.on("updateSettings", (settings) => {
