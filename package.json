@@ -28,7 +28,7 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "heroku-postbuild": "npm run build && NODE_ENV=production npm run server"
+    "heroku-postbuild": "NODE_ENV=development concurrently --kill-others \"npm run client\" \"npm run server\""
   },
   "engines": {
     "node": "10.x"
