@@ -29,9 +29,6 @@
     "eject": "react-scripts eject",
     "heroku-postbuild": "npm run build && NODE_ENV=production npm run server"
   },
-  "engines": {
-    "node": "10.x"
-  },
   "eslintConfig": {
     "extends": "react-app"
   },
