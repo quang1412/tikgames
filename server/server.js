@@ -2,7 +2,6 @@ const {
   WebcastPushConnection,
   signatureProvider,
 } = require("tiktok-live-connector")
-const request = require("request")
 const bodyParser = require("body-parser")
 const socket = require("socket.io")
 const express = require("express")
@@ -287,24 +286,17 @@ io.of("/widget").on("connection", async (s) => {
 io.of("/").on("connection", async (socket) => {
   var tiktokRoom = {}
   socket.on("createRoom", (tiktokId) => {
-    fetch("https://isetup.vn/tiktok/assets/js/tiktokgame.json")
-      .then((resp) => resp.json())
-      .then((body) => {
-        console.log(body)
-        if (body.expirationDate[tiktokId] > currentTimeStamp()) {
-          console.log("create new room", tiktokId)
-          tiktokRoom.tiktok && tiktokRoom.tiktok.disconnect()
-          tiktokRoom = new TiktokLive(tiktokId, socket.id)
-        } else {
-          throw new Error()
-        }
-      })
-      .catch((e) => {
-        socket.emit(
-          "tiktok-connectFailed",
-          "Tài khoản Tiktok chưa đăng ký hoặc đã hết hạn"
-        )
-      })
+    const whileList = require("./whileList.json")
+    if (whileList.expirationDate[tiktokId] > currentTimeStamp()) {
+      console.log("create new room", tiktokId)
+      tiktokRoom.tiktok && tiktokRoom.tiktok.disconnect()
+      tiktokRoom = new TiktokLive(tiktokId, socket.id)
+    } else {
+      socket.emit(
+        "tiktok-connectFailed",
+        "Tài khoản Tiktok chưa đăng ký hoặc đã hết hạn"
+      )
+    }
   })
 
   socket.on("updateSettings", (settings) => {

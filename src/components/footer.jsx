@@ -3,7 +3,7 @@ import { Link } from "react-router-dom"
 
 export default function Footer() {
   return (
-    <footer className="container mt-3 mt-md-0 d-flex justify-content-between py-2">
+    <footer className="container mt-3 mt-md-0 d-flex flex-column flex-md-row justify-content-between py-2">
       <div>
         Developed by
         <a href="https://fb.com/trinhdacquang" target="_blank">
