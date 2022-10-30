@@ -3,10 +3,11 @@ import "../App.css"
 
 const Header = () => (
   <div className="d-flex justify-content-between">
-    <img
+    <h4 className="text-light">Tiktok Games</h4>
+    {/* <img
       src="https://upload.wikimedia.org/wikipedia/en/thumb/a/a9/TikTok_logo.svg/1280px-TikTok_logo.svg.png"
       width={100}
-    />
+    /> */}
   </div>
 )
 

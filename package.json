@@ -20,7 +20,7 @@
     "@popperjs/core": "^2.11.6"
   },
   "scripts": {
-    "start": "npm run production",
+    "start": "npm run development",
     "development": "NODE_ENV=development concurrently --kill-others \"npm run client\" \"npm run server\"",
     "production": "npm run build && NODE_ENV=production npm run server",
     "server": "node server/server.js",
