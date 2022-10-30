@@ -344,7 +344,7 @@ function App() {
               size="md"
               md="12"
               lg="7"
-              className="overflow-hidden d-flex flex-column align-items-center justify-content-center"
+              className="pb-2 overflow-hidden d-flex flex-column align-items-center justify-content-center"
             >
               <div className="mb-3">
                 <div style={{ paddingBottom: "100px" }}>
